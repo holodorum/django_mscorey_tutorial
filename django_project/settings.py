@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-x6j^m96q@hqkpv)tdxfhakfsm64%(yjmxx2i11+t9e%@rgpk01
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['44.199.142.221']
 
 
 # Application definition
@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'holodorum-django-blog',
+        'NAME': 'postgres',
         'USER': 'holodorum',
         'PASSWORD': os.environ.get('AWS_RDS_PASSWORD'),
         'HOST': os.environ.get('AWS_RDS_HOST'),
