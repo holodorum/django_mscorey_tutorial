@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import json
+
+with open('/etc/config.json') as config_file:
+    config =json.load(config_file)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY =os.environ.get('DJANGO_BLOG_SECRET_KEY')
+SECRET_KEY =config['DJANGO_BLOG_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -83,8 +87,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
         'USER': 'holodorum',
-        'PASSWORD': os.environ.get('AWS_RDS_PASSWORD'),
-        'HOST': os.environ.get('AWS_RDS_HOST'),
+        'PASSWORD': config['AWS_RDS_PASSWORD'],
+        'HOST': config['AWS_RDS_HOST'],
         'PORT': '5432',
 
     }
@@ -127,7 +131,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 #Settings for s3 buckets
-AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_STORAGE_BUCKET_NAME = config.get('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_FILE_OVERWRITE = False #If same file gets uploaded we don't want it to be overwritten, but being renamed
 AWS_DEFAULT_ACL = None #Current default can cause some issues (whatever it means)
 DEFAULT_FILE_STORAGE='storages.backends.s3boto3.S3Boto3Storage' #Find more info in the django_storages documentation
@@ -152,5 +156,5 @@ LOGIN_URL= 'login'
 #SET mail settings
 EMAIL_BACKEND = 'django_ses.SESBackend'
 DEFAULT_FROM_EMAIL = 'TheBest <bart@grapplersuniversity.com>'
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_ACCESS_KEY_ID = config.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config.get('AWS_SECRET_ACCESS_KEY')
