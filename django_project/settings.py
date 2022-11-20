@@ -30,8 +30,7 @@ SECRET_KEY =config['DJANGO_BLOG_SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['44.199.142.221']
-
+ALLOWED_HOSTS = ['44.199.142.221', 'grapplersuniversity.com', 'www.grapplersuniversity.com']
 
 # Application definition
 
