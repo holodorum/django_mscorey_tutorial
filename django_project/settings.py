@@ -80,10 +80,16 @@ WSGI_APPLICATION = 'django_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'holodorum-django-blog',
+        'USER': 'holodorum',
+        'PASSWORD': os.environ.get('AWS_RDS_PASSWORD'),
+        'HOST': os.environ.get('AWS_RDS_HOST'),
+        'PORT': '5432',
+
     }
 }
+
 
 
 # Password validation
